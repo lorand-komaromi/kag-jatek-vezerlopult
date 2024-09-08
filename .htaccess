@@ -1,0 +1,60 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} /index\.(php|html)$ [NC]
+RewriteRule ^ - [R=404,L]
+
+RewriteCond %{REQUEST_URI} ^/public/pages/?$ [NC]
+RewriteRule ^ - [R=404,L]
+
+RewriteCond %{REQUEST_URI} ^/public/?$ [NC]
+RewriteRule ^ - [R=404,L]
+
+RewriteRule ^$ kezdolap/ [L]
+
+RewriteCond %{REQUEST_URI} ^/public/ [NC]
+RewriteCond %{REQUEST_URI} !^/public/(.*)$ [NC]
+RewriteRule ^public/(.*)$ /$1 [L]
+
+RewriteCond %{DOCUMENT_ROOT}/public/pages/$1 -d
+RewriteCond %{DOCUMENT_ROOT}/public/pages/$1/index.php -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/public/pages/$1/index.html -f
+RewriteRule ^([^/]+)/?$ pages/$1/ [L,NC]
+
+RewriteCond %{DOCUMENT_ROOT}/public/pages/$1/$2 -f
+RewriteRule ^([^/]+)/(.+)$ pages/$1/$2 [L,NC]
+
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L,NC]
+
+Options -Indexes
+
+ExpiresActive On
+
+ExpiresDefault "access plus 1 month"
+
+# images
+ExpiresByType image/jpg "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/gif "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+ExpiresByType image/x-icon "access plus 1 year"
+
+# css, js
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresByType text/javascript "access plus 1 month"
+
+# fonts
+ExpiresByType font/ttf "access plus 1 year"
+ExpiresByType font/woff "access plus 1 year"
+ExpiresByType font/woff2 "access plus 1 year"
+
+# video
+ExpiresByType video/mp4 "access plus 1 year"
+ExpiresByType video/webm "access plus 1 year"
+
+# other
+ExpiresByType application/pdf "access plus 1 month"
