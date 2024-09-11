@@ -42,9 +42,9 @@ if ($game_id_valid) {
 
 if ($game_exists && $authorized) {
     if ($game_started) {
-        include 'game.php';
+        include './game.php';
     } else {
-        include 'init.php';
+        include './init.php';
     }
 } else {
     die("Ez a játék nem elérhető. (Nem létezik / Nincs jogosultságod)");

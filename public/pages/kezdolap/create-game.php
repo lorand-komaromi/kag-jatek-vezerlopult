@@ -27,7 +27,7 @@ if (isset($_POST['create_game'])) {
     } while ($id_exists); // continue the generation until its unique
 
     // insert into database
-    $stmt = $conn->prepare("INSERT INTO games (game_id, kor, aktiv, created_by) VALUES (?, 0, TRUE, ?)");
+    $stmt = $conn->prepare("INSERT INTO games (game_id, kor, aktiv, created_by) VALUES (?, 1, TRUE, ?)");
     $stmt->bind_param("is", $game_id, $created_by);
 
     if ($stmt->execute()) {
